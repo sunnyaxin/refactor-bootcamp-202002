@@ -21,7 +21,7 @@ class Order {
         return customerAddress;
     }
 
-    List<Product> getLineItems() {
+    List<Product> getProducts() {
         return products;
     }
 }

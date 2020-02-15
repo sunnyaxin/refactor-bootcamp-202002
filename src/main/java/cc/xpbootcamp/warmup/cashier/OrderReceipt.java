@@ -15,9 +15,9 @@ class OrderReceipt {
         output.append(order.getCustomerName());
         output.append(order.getCustomerAddress());
 
-        double totSalesTx = 0d;
-        double tot = 0d;
-        for (Product product : order.getLineItems()) {
+        double totalSalesTax = 0d;
+        double totalAmount = 0d;
+        for (Product product : order.getProducts()) {
             output.append(product.getDescription());
             output.append('\t');
             output.append(product.getPrice());
@@ -28,14 +28,12 @@ class OrderReceipt {
             output.append('\n');
 
             double salesTax = product.totalAmount() * .10;
-            totSalesTx += salesTax;
-
-            tot += product.totalAmount() + salesTax;
+            totalSalesTax += salesTax;
+            totalAmount += product.totalAmount() + salesTax;
         }
 
-        output.append("Sales Tax").append('\t').append(totSalesTx);
-
-        output.append("Total Amount").append('\t').append(tot);
+        output.append("Sales Tax").append('\t').append(totalSalesTax);
+        output.append("Total Amount").append('\t').append(totalAmount);
         return output.toString();
     }
 }
