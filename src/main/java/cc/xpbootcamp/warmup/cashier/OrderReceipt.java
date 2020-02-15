@@ -1,13 +1,13 @@
 package cc.xpbootcamp.warmup.cashier;
 
-public class OrderReceipt {
+class OrderReceipt {
     private Order order;
 
-    public OrderReceipt(Order order) {
+    OrderReceipt(Order order) {
         this.order = order;
     }
 
-    public String printReceipt() {
+    String printReceipt() {
         StringBuilder output = new StringBuilder();
 
         output.append("======Printing Orders======\n");
