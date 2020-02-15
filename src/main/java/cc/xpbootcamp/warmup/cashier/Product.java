@@ -1,11 +1,11 @@
 package cc.xpbootcamp.warmup.cashier;
 
-class LineItem {
+class Product {
     private String description;
     private double price;
     private int quality;
 
-    LineItem(String description, double price, int quality) {
+    Product(String description, double price, int quality) {
         this.description = description;
         this.price = price;
         this.quality = quality;
