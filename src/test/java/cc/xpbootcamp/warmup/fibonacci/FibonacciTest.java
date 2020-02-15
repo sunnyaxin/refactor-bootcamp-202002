@@ -19,4 +19,9 @@ public class FibonacciTest {
     void should_return_1_when_calculate_give_position_is_1() {
         assertThat(1, is(fibonacci.calculate(1)));
     }
+
+    @Test
+    void should_return_2_when_calculate_give_position_is_3() {
+        assertThat(2, is(fibonacci.calculate(3)));
+    }
 }
