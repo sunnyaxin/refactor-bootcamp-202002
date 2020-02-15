@@ -17,21 +17,21 @@ public class FibonacciTest {
 
     @Test
     void should_return_1_when_calculate_give_position_is_1() {
-        assertThat(1, is(fibonacci.calculate(1)));
+        assertThat(fibonacci.calculate(1), is(1));
     }
 
     @Test
     void should_return_2_when_calculate_give_position_is_3() {
-        assertThat(2, is(fibonacci.calculate(3)));
+        assertThat(fibonacci.calculate(3), is(2));
     }
 
     @Test
     void should_return_3_when_calculate_give_position_is_4() {
-        assertThat(3, is(fibonacci.calculate(4)));
+        assertThat(fibonacci.calculate(4), is(3));
     }
 
     @Test
     void should_return_144_when_calculate_give_position_is_12() {
-        assertThat(144, is(fibonacci.calculate(12)));
+        assertThat(fibonacci.calculate(12), is(144));
     }
 }
