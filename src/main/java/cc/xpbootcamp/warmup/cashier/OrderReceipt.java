@@ -14,27 +14,40 @@ class OrderReceipt {
 
     String printReceipt() {
         StringBuilder output = new StringBuilder();
+        printTitle(output);
+        printCustomerInfo(output);
+        printProductsInfo(output);
+        return output.toString();
+    }
 
+    private void printTitle(StringBuilder output) {
         output.append(PRINTING_ORDERS_TITLE);
+    }
 
+    private void printCustomerInfo(StringBuilder output) {
         output.append(order.getCustomerName());
         output.append(order.getCustomerAddress());
+    }
 
+    private void printProductsInfo(StringBuilder output) {
         double totalSalesTax = 0d;
         double totalAmount = 0d;
+
         for (Product product : order.getProducts()) {
-            output.append(product.getDescription()).append('\t');
-            output.append(product.getPrice()).append('\t');
-            output.append(product.getQuantity()).append('\t');
-            output.append(product.totalAmount()).append('\n');
+            printProductBasicInfo(output, product);
 
             double salesTax = product.totalAmount() * TAX_Rate;
             totalSalesTax += salesTax;
             totalAmount += product.totalAmount() + salesTax;
         }
-
         output.append(SALES_TAX).append('\t').append(totalSalesTax);
         output.append(TOTAL_AMOUNT).append('\t').append(totalAmount);
-        return output.toString();
+    }
+
+    private void printProductBasicInfo(StringBuilder output, Product product) {
+        output.append(product.getDescription()).append('\t');
+        output.append(product.getPrice()).append('\t');
+        output.append(product.getQuantity()).append('\t');
+        output.append(product.totalAmount()).append('\n');
     }
 }
