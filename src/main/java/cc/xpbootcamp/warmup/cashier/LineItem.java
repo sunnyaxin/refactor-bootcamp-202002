@@ -1,25 +1,25 @@
 package cc.xpbootcamp.warmup.cashier;
 
-public class LineItem {
+class LineItem {
     private String description;
     private double price;
     private int quality;
 
-    public LineItem(String description, double price, int quality) {
+    LineItem(String description, double price, int quality) {
         this.description = description;
         this.price = price;
         this.quality = quality;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public double getPrice() {
+    double getPrice() {
         return price;
     }
 
-    public int getQuantity() {
+    int getQuantity() {
         return quality;
     }
 
