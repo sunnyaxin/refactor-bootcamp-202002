@@ -10,18 +10,6 @@ import static org.hamcrest.Matchers.containsString;
 
 class OrderReceiptTest {
     @Test
-    void shouldPrintCustomerInformationOnOrder() {
-        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<Product>());
-        OrderReceipt receipt = new OrderReceipt(order);
-
-        String output = receipt.printReceipt();
-
-
-        assertThat(output, containsString("Mr X"));
-        assertThat(output, containsString("Chicago, 60601"));
-    }
-
-    @Test
     public void shouldPrintLineItemAndSalesTaxInformation() {
         List<Product> products = new ArrayList<Product>() {{
             add(new Product("milk", 10.0, 2));
@@ -32,11 +20,12 @@ class OrderReceiptTest {
 
         String output = receipt.printReceipt();
 
-        assertThat(output, containsString("milk\t10.0\t2\t20.0\n"));
-        assertThat(output, containsString("biscuits\t5.0\t5\t25.0\n"));
-        assertThat(output, containsString("chocolate\t20.0\t1\t20.0\n"));
-        assertThat(output, containsString("Sales Tax\t6.5"));
-        assertThat(output, containsString("Total Amount\t71.5"));
+        System.out.println(output);
+        assertThat(output, containsString("milk，10.0x2，20.0\n"));
+        assertThat(output, containsString("biscuits，5.0x5，25.0\n"));
+        assertThat(output, containsString("chocolate，20.0x1，20.0\n"));
+        assertThat(output, containsString("税额：6.5\n"));
+        assertThat(output, containsString("总价：71.5\n"));
     }
 
 }
