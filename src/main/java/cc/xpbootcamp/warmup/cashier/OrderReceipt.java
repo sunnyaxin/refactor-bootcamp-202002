@@ -6,7 +6,10 @@ class OrderReceipt {
     public static final String CHINESE_WEEKDAY_NUMBER = "一二三四五六日";
     public static final String SALES_TAX = "税额";
     public static final String TOTAL_AMOUNT = "总价";
+    public static final String DISCOUNT = "折扣";
     public static final double TAX_Rate = .10;
+    public static final int DISCOUNT_WEEK_DAY = 3;
+    public static final double DISCOUNT_RATE = 0.02;
 
     private Order order;
 
@@ -20,9 +23,19 @@ class OrderReceipt {
         printDate(output);
         printProductsInfo(output);
         printDivider(output);
-        double totalTax = printTax(output);
-        printAmount(output, totalTax);
+
+        double totalTax = calculateTax();
+        double totalAmount = calculateAmount(totalTax) + totalTax;
+        double discount = calculateDiscount(totalAmount);
+        printPrice(totalTax, discount, totalAmount, output);
         return output.toString();
+    }
+
+    private void printPrice(double totalTax, double discount, double totalAmount, StringBuilder output) {
+        output.append(SALES_TAX).append('：').append(totalTax).append('\n');
+        if (discount != 0)
+            output.append(DISCOUNT).append('：').append(discount).append('\n');
+        output.append(TOTAL_AMOUNT).append('：').append(totalAmount - discount).append('\n');
     }
 
     private void printTitle(StringBuilder output) {
@@ -50,21 +63,27 @@ class OrderReceipt {
         output.append(DIVIDER);
     }
 
-    private double printTax(StringBuilder output) {
+    private double calculateTax() {
         double totalSalesTax = 0d;
         for (Product product : order.getProducts()) {
             double salesTax = product.totalAmount() * TAX_Rate;
             totalSalesTax += salesTax;
         }
-        output.append(SALES_TAX).append('：').append(totalSalesTax).append('\n');
         return totalSalesTax;
     }
 
-    private void printAmount(StringBuilder output, double totalTax) {
+    private double calculateDiscount(double totalAmount) {
+        double discount = 0d;
+        if (order.getOrderDate().getWeekDay().getValue() == DISCOUNT_WEEK_DAY)
+            discount = totalAmount * DISCOUNT_RATE;
+        return discount;
+    }
+
+    private double calculateAmount(double totalTax) {
         double totalAmount = 0d;
         for (Product product : order.getProducts()) {
             totalAmount += product.totalAmount();
         }
-        output.append(TOTAL_AMOUNT).append('：').append(totalAmount + totalTax).append('\n');
+        return totalAmount;
     }
 }
