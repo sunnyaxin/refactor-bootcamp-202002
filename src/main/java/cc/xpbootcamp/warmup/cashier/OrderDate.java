@@ -3,16 +3,16 @@ package cc.xpbootcamp.warmup.cashier;
 import java.time.DayOfWeek;
 import java.time.Month;
 
-class OrderTime {
+class OrderDate {
     private int year;
     private Month month;
-    private int date;
+    private int day;
     private DayOfWeek weekDay;
 
-    OrderTime(int year, Month month, int date, DayOfWeek weekDay) {
+    OrderDate(int year, Month month, int day, DayOfWeek weekDay) {
         this.year = year;
         this.month = month;
-        this.date = date;
+        this.day = day;
         this.weekDay = weekDay;
     }
 
@@ -24,8 +24,8 @@ class OrderTime {
         return month;
     }
 
-    int getDate() {
-        return date;
+    int getDay() {
+        return day;
     }
 
     DayOfWeek getWeekDay() {

@@ -3,6 +3,7 @@ package cc.xpbootcamp.warmup.cashier;
 class OrderReceipt {
     public static final String PRINTING_ORDERS_TITLE = "====== 老王超市，值得信赖 ======\n";
     public static final String DIVIDER = "--------------------------\n";
+    public static final String CHINESE_WEEKDAY_NUMBER = "一二三四五六日";
     public static final String SALES_TAX = "税额";
     public static final String TOTAL_AMOUNT = "总价";
     public static final double TAX_Rate = .10;
@@ -16,6 +17,7 @@ class OrderReceipt {
     String printReceipt() {
         StringBuilder output = new StringBuilder();
         printTitle(output);
+        printDate(output);
         printProductsInfo(output);
         printDivider(output);
         double totalTax = printTax(output);
@@ -25,6 +27,14 @@ class OrderReceipt {
 
     private void printTitle(StringBuilder output) {
         output.append(PRINTING_ORDERS_TITLE).append('\n');
+    }
+
+    private void printDate(StringBuilder output) {
+        OrderDate date = order.getOrderDate();
+        output.append(date.getYear()).append('年');
+        output.append(date.getMonth().getValue()).append('月');
+        output.append(date.getDay()).append('日').append('，');
+        output.append("星期").append(CHINESE_WEEKDAY_NUMBER.charAt(date.getWeekDay().getValue() - 1)).append("\n\n");
     }
 
     private void printProductsInfo(StringBuilder output) {
