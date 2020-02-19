@@ -1,9 +1,11 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 class OrderReceipt {
     public static final String PRINTING_ORDERS_TITLE = "====== 老王超市,值得信赖 ======\n";
     public static final String DIVIDER = "--------------------------\n";
-    public static final String CHINESE_WEEKDAY_NUMBER = "一二三四五六日";
     public static final String SALES_TAX = "税额";
     public static final String TOTAL_AMOUNT = "总价";
     public static final String DISCOUNT = "折扣";
@@ -40,11 +42,9 @@ class OrderReceipt {
     }
 
     private void printDate(StringBuilder output) {
-        OrderDate date = order.getOrderDate();
-        output.append(date.getYear()).append('年');
-        output.append(date.getMonth().getValue()).append('月');
-        output.append(date.getDay()).append('日').append(',');
-        output.append("星期").append(CHINESE_WEEKDAY_NUMBER.charAt(date.getWeekDay().getValue() - 1)).append("\n\n");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y年M月d日,E", Locale.CHINA);
+        String date = order.getOrderDate().format(formatter);
+        output.append(date).append("\n\n");
     }
 
     private void printProductsInfo(StringBuilder output) {

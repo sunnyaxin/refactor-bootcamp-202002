@@ -2,8 +2,7 @@ package cc.xpbootcamp.warmup.cashier;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.DayOfWeek;
-import java.time.Month;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ class OrderReceiptTest {
             add(new Product("biscuits", 5.0, 5));
             add(new Product("chocolate", 20.0, 1));
         }};
-        OrderDate orderDate = new OrderDate(2020, Month.FEBRUARY, 17, DayOfWeek.MONDAY);
+        LocalDate orderDate = LocalDate.of(2020, 2, 17);
         OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderDate, products));
 
         String output = receipt.printReceipt();
@@ -38,7 +37,7 @@ class OrderReceiptTest {
             add(new Product("巧克力", 21.5, 2));
             add(new Product("小白菜", 10.0, 1));
         }};
-        OrderDate orderDate = new OrderDate(2020, Month.FEBRUARY, 19, DayOfWeek.WEDNESDAY);
+        LocalDate orderDate = LocalDate.of(2020, 2, 19);
         OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderDate, products));
 
         String output = receipt.printReceipt();
