@@ -24,9 +24,9 @@ class OrderReceipt {
         printProductsInfo(output);
         printDivider(output);
 
-        double totalTax = calculateTax();
-        double totalAmount = calculateAmount(totalTax) + totalTax;
-        double discount = calculateDiscount(totalAmount);
+        double totalTax = order.calculateTax();
+        double totalAmount = order.calculateAmount() + totalTax;
+        double discount = order.calculateDiscount(totalAmount);
         printPrice(totalTax, discount, totalAmount, output);
         return output.toString();
     }
@@ -61,29 +61,5 @@ class OrderReceipt {
 
     private void printDivider(StringBuilder output) {
         output.append(DIVIDER);
-    }
-
-    private double calculateTax() {
-        double totalSalesTax = 0d;
-        for (Product product : order.getProducts()) {
-            double salesTax = product.totalAmount() * TAX_Rate;
-            totalSalesTax += salesTax;
-        }
-        return totalSalesTax;
-    }
-
-    private double calculateDiscount(double totalAmount) {
-        double discount = 0d;
-        if (order.getOrderDate().getWeekDay().getValue() == DISCOUNT_WEEK_DAY)
-            discount = totalAmount * DISCOUNT_RATE;
-        return discount;
-    }
-
-    private double calculateAmount(double totalTax) {
-        double totalAmount = 0d;
-        for (Product product : order.getProducts()) {
-            totalAmount += product.totalAmount();
-        }
-        return totalAmount;
     }
 }

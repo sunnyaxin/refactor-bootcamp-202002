@@ -30,4 +30,28 @@ class Order {
     List<Product> getProducts() {
         return products;
     }
+
+    double calculateTax() {
+        double totalSalesTax = 0d;
+        for (Product product : getProducts()) {
+            double salesTax = product.totalAmount() * OrderReceipt.TAX_Rate;
+            totalSalesTax += salesTax;
+        }
+        return totalSalesTax;
+    }
+
+    double calculateAmount() {
+        double totalAmount = 0d;
+        for (Product product : getProducts()) {
+            totalAmount += product.totalAmount();
+        }
+        return totalAmount;
+    }
+
+    double calculateDiscount(double totalAmount) {
+        double discount = 0d;
+        if (getOrderDate().getWeekDay().getValue() == OrderReceipt.DISCOUNT_WEEK_DAY)
+            discount = totalAmount * OrderReceipt.DISCOUNT_RATE;
+        return discount;
+    }
 }
