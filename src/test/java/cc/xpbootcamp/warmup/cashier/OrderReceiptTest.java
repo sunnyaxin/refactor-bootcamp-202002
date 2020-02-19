@@ -24,12 +24,12 @@ class OrderReceiptTest {
 
         String output = receipt.printReceipt();
 
-        assertThat(output, containsString("2020年2月17日，星期一\n\n"));
-        assertThat(output, containsString("milk，10.0x2，20.0\n"));
-        assertThat(output, containsString("biscuits，5.0x5，25.0\n"));
-        assertThat(output, containsString("chocolate，20.0x1，20.0\n"));
-        assertThat(output, containsString("税额：6.5\n"));
-        assertThat(output, containsString("总价：71.5\n"));
+        assertThat(output, containsString("2020年2月17日,星期一\n\n"));
+        assertThat(output, containsString("milk,10.00x2,20.00\n"));
+        assertThat(output, containsString("biscuits,5.00x5,25.00\n"));
+        assertThat(output, containsString("chocolate,20.00x1,20.00\n"));
+        assertThat(output, containsString("税额:6.50\n"));
+        assertThat(output, containsString("总价:71.50\n"));
     }
 
     @Test
@@ -42,14 +42,14 @@ class OrderReceiptTest {
         OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderDate, products));
 
         String output = receipt.printReceipt();
-        String expectedOutput = "====== 老王超市，值得信赖 ======\n\n" +
-                "2020年2月19日，星期三\n\n" +
-                "巧克力，21.5x2，43.0\n" +
-                "小白菜，10.0x1，10.0\n" +
+        String expectedOutput = "====== 老王超市,值得信赖 ======\n\n" +
+                "2020年2月19日,星期三\n\n" +
+                "巧克力,21.50x2,43.00\n" +
+                "小白菜,10.00x1,10.00\n" +
                 "--------------------------\n" +
-                "税额：5.3\n" +
-                "折扣：1.166\n" +
-                "总价：57.134\n";
+                "税额:5.30\n" +
+                "折扣:1.17\n" +
+                "总价:57.13\n";
 
         assertThat(output, is(expectedOutput));
     }
