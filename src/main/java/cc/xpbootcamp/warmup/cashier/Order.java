@@ -8,24 +8,12 @@ class Order {
     public static final double TAX_Rate = .10;
     public static final double DISCOUNT_RATE = 0.02;
 
-    private String customerName;
-    private String customerAddress;
     private LocalDate orderDate;
     private List<Product> products;
 
-    Order(String customerName, String customerAddress, LocalDate orderDate, List<Product> products) {
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
+    Order(LocalDate orderDate, List<Product> products) {
         this.orderDate = orderDate;
         this.products = products;
-    }
-
-    String getCustomerName() {
-        return customerName;
-    }
-
-    String getCustomerAddress() {
-        return customerAddress;
     }
 
     public LocalDate getOrderDate() {

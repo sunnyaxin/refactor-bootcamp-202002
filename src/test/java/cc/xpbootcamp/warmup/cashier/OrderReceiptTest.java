@@ -19,7 +19,7 @@ class OrderReceiptTest {
             add(new Product("chocolate", 20.0, 1));
         }};
         LocalDate orderDate = LocalDate.of(2020, 2, 17);
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderDate, products));
+        OrderReceipt receipt = new OrderReceipt(new Order(orderDate, products));
 
         String output = receipt.printReceipt();
 
@@ -38,7 +38,7 @@ class OrderReceiptTest {
             add(new Product("小白菜", 10.0, 1));
         }};
         LocalDate orderDate = LocalDate.of(2020, 2, 19);
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderDate, products));
+        OrderReceipt receipt = new OrderReceipt(new Order(orderDate, products));
 
         String output = receipt.printReceipt();
         String expectedOutput = "====== 老王超市,值得信赖 ======\n\n" +
