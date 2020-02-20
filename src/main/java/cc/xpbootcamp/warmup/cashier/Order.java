@@ -25,20 +25,11 @@ class Order {
     }
 
     double calculateTax() {
-        double totalSalesTax = 0d;
-        for (Product product : getProducts()) {
-            double salesTax = product.totalAmount() * TAX_RATE;
-            totalSalesTax += salesTax;
-        }
-        return totalSalesTax;
+        return products.stream().mapToDouble(Product::totalAmount).sum() * TAX_RATE;
     }
 
     double calculateAmountWithTax() {
-        double amountWithTax = 0d;
-        for (Product product : getProducts()) {
-            amountWithTax += product.totalAmount() * (1 + TAX_RATE);
-        }
-        return amountWithTax;
+        return products.stream().mapToDouble(Product::totalAmount).sum() * (1 + TAX_RATE);
     }
 
     double calculateTotalAmount() {

@@ -44,9 +44,11 @@ class OrderReceipt {
     }
 
     private void printProductsInfo(StringBuilder output) {
-        for (Product product : order.getProducts()) {
-            output.append(String.format("%s,%.2fx%d,%.2f", product.getDescription(), product.getPrice(), product.getQuantity(), product.totalAmount())).append('\n');
-        }
+        order.getProducts().forEach(product -> output.append(String.format("%s,%.2fx%d,%.2f",
+                product.getDescription(),
+                product.getPrice(),
+                product.getQuantity(),
+                product.totalAmount())).append('\n'));
     }
 
     private void printDivider(StringBuilder output) {
