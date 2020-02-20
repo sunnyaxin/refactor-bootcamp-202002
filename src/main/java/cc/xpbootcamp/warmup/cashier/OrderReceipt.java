@@ -22,15 +22,15 @@ class OrderReceipt {
         printDate(output);
         printProductsInfo(output);
         printDivider(output);
-
-        double totalTax = order.calculateTax();
-        double totalAmount = order.calculateAmount() + totalTax;
-        double discount = order.calculateDiscount(totalAmount);
-        printPrice(totalTax, discount, totalAmount, output);
+        printPrice(output);
         return output.toString();
     }
 
-    private void printPrice(double totalTax, double discount, double totalAmount, StringBuilder output) {
+    private void printPrice(StringBuilder output) {
+        double totalTax = order.calculateTax();
+        double totalAmount = order.calculateAmount() + totalTax;
+        double discount = order.calculateDiscount(totalAmount);
+
         output.append(String.format(SALES_TAX + ":%.2f", totalTax)).append('\n');
         if (discount != 0)
             output.append(String.format(DISCOUNT + ":%.2f", discount)).append('\n');
@@ -49,8 +49,7 @@ class OrderReceipt {
 
     private void printProductsInfo(StringBuilder output) {
         for (Product product : order.getProducts()) {
-            output.append(product.getDescription()).append(',');
-            output.append(String.format("%.2fx%d,%.2f", product.getPrice(), product.getQuantity(), product.totalAmount())).append('\n');
+            output.append(String.format("%s,%.2fx%d,%.2f", product.getDescription(), product.getPrice(), product.getQuantity(), product.totalAmount())).append('\n');
         }
     }
 
