@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 class Order {
-    public static final double TAX_Rate = .10;
+    public static final double TAX_RATE = .10;
     public static final double DISCOUNT_RATE = 0.02;
 
     private LocalDate orderDate;
@@ -27,24 +27,29 @@ class Order {
     double calculateTax() {
         double totalSalesTax = 0d;
         for (Product product : getProducts()) {
-            double salesTax = product.totalAmount() * TAX_Rate;
+            double salesTax = product.totalAmount() * TAX_RATE;
             totalSalesTax += salesTax;
         }
         return totalSalesTax;
     }
 
-    double calculateAmount() {
-        double totalAmount = 0d;
+    double calculateAmountWithTax() {
+        double amountWithTax = 0d;
         for (Product product : getProducts()) {
-            totalAmount += product.totalAmount();
+            amountWithTax += product.totalAmount() * (1 + TAX_RATE);
         }
-        return totalAmount;
+        return amountWithTax;
     }
 
-    double calculateDiscount(double totalAmount) {
-        double discount = 0d;
-        if (orderDate.getDayOfWeek() == DayOfWeek.WEDNESDAY)
-            discount = totalAmount * DISCOUNT_RATE;
-        return discount;
+    double calculateTotalAmount() {
+        return hasDiscount() ? calculateAmountWithTax() - calculateDiscount() : calculateAmountWithTax();
+    }
+
+    double calculateDiscount() {
+        return calculateAmountWithTax() * DISCOUNT_RATE;
+    }
+
+    boolean hasDiscount() {
+        return orderDate.getDayOfWeek() == DayOfWeek.WEDNESDAY;
     }
 }

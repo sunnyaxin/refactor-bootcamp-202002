@@ -27,14 +27,10 @@ class OrderReceipt {
     }
 
     private void printPrice(StringBuilder output) {
-        double totalTax = order.calculateTax();
-        double totalAmount = order.calculateAmount() + totalTax;
-        double discount = order.calculateDiscount(totalAmount);
-
-        output.append(String.format(SALES_TAX + ":%.2f", totalTax)).append('\n');
-        if (discount != 0)
-            output.append(String.format(DISCOUNT + ":%.2f", discount)).append('\n');
-        output.append(String.format(TOTAL_AMOUNT + ":%.2f", totalAmount - discount)).append('\n');
+        output.append(String.format(SALES_TAX + ":%.2f", order.calculateTax())).append('\n');
+        if (order.hasDiscount())
+            output.append(String.format(DISCOUNT + ":%.2f", order.calculateDiscount())).append('\n');
+        output.append(String.format(TOTAL_AMOUNT + ":%.2f", order.calculateTotalAmount())).append('\n');
     }
 
     private void printTitle(StringBuilder output) {
