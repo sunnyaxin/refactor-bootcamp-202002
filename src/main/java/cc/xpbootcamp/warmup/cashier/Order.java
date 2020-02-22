@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 class Order {
-    public static final double TAX_RATE = .10;
-    public static final double DISCOUNT_RATE = 0.02;
+    private static final double TAX_RATE = .10;
+    private static final double DISCOUNT_RATE = 0.02;
 
     private LocalDate orderDate;
     private List<Product> products;
